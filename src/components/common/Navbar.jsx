@@ -1,8 +1,10 @@
 import { NavLink } from "react-router";
-
-
+import { getCookie } from "../../assets/cookieActions";
 export default function Navbar() {
-    var isLogin=false; // temparary to check 
+    
+    var isLogin=(getCookie("accessToken"))? true : false;
+    
+
     return (
         <>
             <header className="flex-wrap">
@@ -45,10 +47,18 @@ export default function Navbar() {
                                 </li>
                             </>
                                 :
-                                <>
+                                <> 
+                                   {(isLogin && getCookie("role")=="admin")?
+
+                                    <li className="nav-item login ">
+                                        <NavLink to="/admin" className="nav-link active " aria-current="page" href="#">
+                                            <button type="button" className="btn  bg-primary text-white text-bold px-5">ADMIN </button>
+                                        </NavLink>
+                                    </li> :""
+                                    }
                                     <li className="nav-item login ">
                                         <NavLink to="/myprofile" className="nav-link active " aria-current="page" href="#">
-                                            <button type="button" className="btn  bg-primary text-white text-bold px-5">MYPROFILE</button>
+                                            <button type="button" className="btn  bg-primary text-white text-bold px-5">MYPROFILE </button>
                                         </NavLink>
                                     </li>
 

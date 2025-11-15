@@ -1,17 +1,23 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import FeedbackCard from "../../components/cards/FeedbackCard"
-export default function Feedback(){
-    return (
-        <>
+import { getAllFeedbackAction } from "../../redux/actions/feedbackAction"
+export default function Feedback(){    var disptach=useDispatch();
+    useEffect(()=>{
+        disptach(getAllFeedbackAction());
+    },[disptach])    
+    var data=useSelector((state)=>state.feedbackData);   
+     return <div>
+           { (data.status) ?
             <div>
                 <h1 className="text-white text-center my-3 p-4 m-auto w-100 bg-primary ">Feedback </h1>
                 <div className="d-flex flex-wrap align-itemx-center gap-4">
                     {
-                        [1,2,3,4,5].map((feed,idx)=>{
+                        data.feedbacks.map((feed,idx)=>{
                             return (<FeedbackCard key={idx}feed={feed}/>)
                         })
                     }
                 </div>
-            </div>
-        </>
-    )
-}
+            </div>:""
+                }
+       </div>}

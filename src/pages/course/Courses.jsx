@@ -9,10 +9,9 @@ export default function Courses() {
     var dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCoursesByLimit(5,search));
-    }, [dispatch,search])
-
+    }, [dispatch,search])    
     var data = useSelector((state) => state.courseData);
-    console.log(data)
+   console.log(data)
     return <div className="p-5">
         {(data.status) ?
             <div>

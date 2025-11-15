@@ -1,15 +1,11 @@
-
-
-
-export function getAllFeedbackReducer(state = { status: false, feedback: [] }, actions) {
-
+function feebackReducer(state = { status: false, feedbacks: [] }, actions) {
     switch (actions.type) {
-
         case "GET_ALL_FEEDBACK":
-            return actions.payload;
-
+            return {status:true,feedbacks:actions.payload}
         default:
-            return {status:false,feedback:[]};
+            return {status:false,feedbacks:[]};
 
     }
 }
+
+export default feebackReducer;

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { removeMsg } from "../../assets/data";
+import { addFeedbackAction } from "../../redux/actions/feedbackAction";
 
 export default function Feedback() {
     const [feedback,setFeedback]=useState("");
@@ -12,7 +13,7 @@ export default function Feedback() {
             
         }
         else{
-            addUserFeedback(feedback);
+           addFeedbackAction(feedback);
         }
         
     }

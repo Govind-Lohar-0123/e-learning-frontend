@@ -32,7 +32,7 @@ export const editCourse = async (course_id, course) => {
 }
 export const getAllCourses = (search) => async (disptach) => {
     try {
-        var result = await axios.get(url + `/courses?search=${search}`);
+        var result = await axios.get(url + `/courses?search=${search}`);        
         disptach({ type: "GET_ALL_COURSES", payload: result.data })
     }
     catch (err) {
@@ -41,8 +41,7 @@ export const getAllCourses = (search) => async (disptach) => {
 }
 export const getCourseDetailsById = (course_id) => async (disptach) => {
     try {
-        var result = await axios.get(url + `/courses/${course_id}`);
-       
+        var result = await axios.get(url + `/courses/${course_id}`);        
         disptach({ type: "GET_COURSE_DETAIL_BY_ID", payload: result.data })
     }
     catch (err) {
@@ -50,12 +49,10 @@ export const getCourseDetailsById = (course_id) => async (disptach) => {
     }
 }
 export const getCoursesByLimit = (limit,search) => async (disptach) => {
-    console.log(search)
-    
-    try {
-        var result = await axios.get(url + `/courses/limit/${limit}?search=${search}`);
-        
-        disptach({ type: "GET_COURSE_BY_LIMIT", payload: result.data })
+    console.log(search)   
+     try {
+        var result = await axios.get(url + `/courses/limit/${limit}?search=${search}`);       
+         disptach({ type: "GET_COURSE_BY_LIMIT", payload: result.data })
     }
     catch (err) {
         disptach({ type: "GET_COURSE_By_LIMIT", payload: [] })
@@ -63,9 +60,8 @@ export const getCoursesByLimit = (limit,search) => async (disptach) => {
 }
 export const getCoursesCount = async (setCoursesCount) => {
     try {
-        var result = await axios.get(url + `/courses/count`);
-        
-        setCoursesCount(result.data);
+        var result = await axios.get(url + `/courses/count`);       
+         setCoursesCount(result.data);
     }
     catch (err) {
         setCoursesCount(0)

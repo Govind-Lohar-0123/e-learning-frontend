@@ -48,7 +48,7 @@ export default function Navbar() {
                             </>
                                 :
                                 <> 
-                                   {(isLogin && getCookie("role")=="admin")?
+                                   {(isLogin && getCookie("role")=="admin")? 
 
                                     <li className="nav-item login ">
                                         <NavLink to="/admin" className="nav-link active " aria-current="page" href="#">

@@ -1,10 +1,9 @@
-export function removeUser() {
-    document.cookie = `user=; expires=${new Date(0).toUTCString()}; path=/`;
+export function removeRole() {
+    document.cookie = `role=; expires=${new Date(0).toUTCString()}; path=/`;
 }
-export function removeToken() {
-    document.cookie = `token=; expires=${new Date(0).toUTCString()}; path=/`;
-}
-export function getCookie(key) {
+export function removeAccessToken() {
+    document.cookie = `accessToken=; expires=${new Date(0).toUTCString()}; path=/`;
+}export function getCookie(key) {
     const nameEQ = key + "=";
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {

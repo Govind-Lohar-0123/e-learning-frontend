@@ -2,7 +2,7 @@ import axios from "axios";
 import { url } from "../../assets/data";
 export const addToMyCourse = async (course_id, user_id) => {
     try {
-        var result = await axios.post(url + `/mycourses/${course_id}/${user_id}`);
+        var result = await axios.post(url + `/mycourses/${course_id}/${user_id}`,{withCredentials:true});
         
         window.location = "/myprofile/mycourses"
     }
@@ -12,7 +12,7 @@ export const addToMyCourse = async (course_id, user_id) => {
 export const getMyAllCourses = (search) => async (disptach) => {
     var user_id = 44;
     try {
-        var result = await axios.get(url + `/mycourses/${user_id}?search=${search}`);
+        var result = await axios.get(url + `/mycourses/${user_id}?search=${search}`,{withCredentials:true});
         console.log(result)
         disptach({ type: "GET_MY_ALL_COURSES", payload: result.data })
     }
@@ -24,7 +24,7 @@ export const getMyAllCourses = (search) => async (disptach) => {
 export const removeMyCourse = async (course_id,user_id) => {
     
     try {
-        var result = await axios.delete(url + `/mycourses/${course_id}/${user_id}`);
+      await axios.delete(url + `/mycourses/${course_id}/${user_id}`,{withCredentials:true});
     }
     catch (err) {
     }

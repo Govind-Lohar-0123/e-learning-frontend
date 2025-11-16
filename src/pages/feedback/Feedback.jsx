@@ -7,8 +7,9 @@ export default function Feedback(){    var disptach=useDispatch();
         disptach(getAllFeedbackAction());
     },[disptach])    
     var data=useSelector((state)=>state.feedbackData);   
+    
      return <div>
-           { (data.status) ?
+           { (data.status && data.feedbacks.length!=0) ?
             <div>
                 <h1 className="text-white text-center my-3 p-4 m-auto w-100 bg-primary ">Feedback </h1>
                 <div className="d-flex flex-wrap align-itemx-center gap-4">

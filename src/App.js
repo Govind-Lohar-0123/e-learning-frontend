@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import AllCourses from "./pages/course/AllCourses";
@@ -14,13 +14,19 @@ import EditCourse from "./pages/admin/Courses/EditCourse";
 import MyCourses from "./pages/profile/MyCourses";
 import Profile from "./pages/profile/Profile";
 import Feedback from "./pages/profile/Feedback";
+import { getCookie } from "./assets/cookieActions";
+
+var isToken = getCookie("accessToken");
+var roleId = getCookie("role");
+var isLogin = (isToken) ? true : false;
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element:((isLogin) ? <Layout /> : <Navigate to="/login" />),
     children: [
       { index: true, element: <Home /> },
-      { path: "all/courses", element: <AllCourses /> },
+      { path: "all-courses", element: <AllCourses /> },
       { path: "premium/courses", element: <AllPremiumCourses /> },
       { path: "course/details/:course_id", element: <CourseDetail /> },
 
@@ -29,15 +35,15 @@ const router = createBrowserRouter([
   ,
   // authentication routes
 
-  { path: "login", element: <Login /> },
-  { path: "register", element: <Register /> },
+  { path: "login", element:((!isLogin) ? <Login /> : <Navigate to="/" />) },
+  { path: "register", element: ((!isLogin) ? <Register /> : <Navigate to="/" />) },
   // My profile routes
 
   // My profile routes
 
   {
     path: "/myprofile",
-    element: <MyProfileLayout/>,
+    element:((isLogin) ? <MyProfileLayout /> : <Navigate to="/login" />),
     children: [
       { index: true, element: <Profile /> },
       { path: "mycourses", element: <MyCourses /> },
@@ -48,7 +54,7 @@ const router = createBrowserRouter([
   // Admin Routes
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: ((isLogin && roleId==2) ? <AdminLayout /> : <Navigate to="/login" />),
     children: [
       { index: true, element: <AdminDashBoard /> },
       { path: "courses/manage", element: <Courses /> },

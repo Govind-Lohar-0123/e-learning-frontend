@@ -1,8 +1,13 @@
 import { NavLink } from "react-router";
 import { getCookie } from "../../assets/cookieActions";
+import { logout } from "../../redux/actions/userActions";
 export default function Navbar() {
     
-    var isLogin=(getCookie("accessToken"))? true : false;
+    
+var isToken = getCookie("accessToken");
+var roleId = getCookie("role");
+var isLogin = (isToken) ? true : false;
+
     
 
     return (
@@ -20,7 +25,7 @@ export default function Navbar() {
                                     <NavLink to="/" className="nav-link active text-bold" aria-current="page" href="#">Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink to="/all/courses" className="nav-link text-bold" href="#">Courses</NavLink>
+                                    <NavLink to="/all-courses" className="nav-link text-bold" href="#">Courses</NavLink>
                                 </li>
 
                                 <li className="nav-item">
@@ -33,7 +38,7 @@ export default function Navbar() {
                     <div className="">
                         <ul className="nav">
 
-                            {(isLogin) ? <>
+                            {(!isLogin) ? <>
                                 <li className="nav-item login ">
                                     <NavLink to="/login" className="nav-link active " aria-current="page" href="#">
                                         <button type="button" className="btn btn-light text-bold px-5">LOGIN</button>
@@ -48,7 +53,7 @@ export default function Navbar() {
                             </>
                                 :
                                 <> 
-                                   {(isLogin && getCookie("role")=="admin")? 
+                                   {(isLogin && roleId==2)? 
 
                                     <li className="nav-item login ">
                                         <NavLink to="/admin" className="nav-link active " aria-current="page" href="#">
@@ -63,7 +68,7 @@ export default function Navbar() {
                                     </li>
 
                                     <li className="nav-item login ">
-                                        <NavLink className="nav-link active" aria-current="page" href="#">
+                                        <NavLink className="nav-link active"onClick={logout} aria-current="page" href="#">
                                             <button type="button" className="btn btn-light text-bold px-5">LOGOUT</button>
                                         </NavLink>
                                     </li>

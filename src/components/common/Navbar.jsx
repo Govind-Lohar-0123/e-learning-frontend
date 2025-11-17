@@ -1,15 +1,18 @@
 import { NavLink } from "react-router";
 import { getCookie } from "../../assets/cookieActions";
-import { logout } from "../../redux/actions/userActions";
+import {  logout } from "../../redux/actions/userActions";
+import {  useSelector } from "react-redux";
+
+
+
+
 export default function Navbar() {
+    const userData=useSelector((state)=>state.userData);
+    const token = getCookie("accessToken");
+    const isLogin = (token!="undefined" && token!=null && token!="") ? true : false;
+    const role = userData?.role;
     
-    
-var isToken = getCookie("accessToken");
-var roleId = getCookie("role");
-var isLogin = (isToken) ? true : false;
-
-    
-
+   
     return (
         <>
             <header className="flex-wrap">
@@ -53,7 +56,7 @@ var isLogin = (isToken) ? true : false;
                             </>
                                 :
                                 <> 
-                                   {(isLogin && roleId==2)? 
+                                   {(isLogin && role=="Admin")? 
 
                                     <li className="nav-item login ">
                                         <NavLink to="/admin" className="nav-link active " aria-current="page" href="#">

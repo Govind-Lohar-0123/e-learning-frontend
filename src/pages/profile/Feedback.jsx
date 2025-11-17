@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { removeMsg } from "../../assets/data";
 import { addFeedbackAction } from "../../redux/actions/feedbackAction";
+import { useSelector } from "react-redux";
 
 export default function Feedback() {
     const [feedback,setFeedback]=useState("");
    const [message, setMessage] = useState({ status: false, msg: "" });
+   const userData=useSelector((state)=>state.userData);
     function handleFeedback(e){
         e.preventDefault();
         if(!feedback){
@@ -13,7 +15,7 @@ export default function Feedback() {
             
         }
         else{
-           addFeedbackAction(feedback);
+           addFeedbackAction(feedback,userData.id);
         }
         
     }

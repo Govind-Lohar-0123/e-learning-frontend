@@ -13,7 +13,7 @@ export const addCourse = async (course, setMessage) => {
 export const deleteCourse = async (course_id) => {
     try {
         var resul=await axios.delete(url + `/courses/${course_id}`,{withCredentials:true});
-        console.log(resul)
+        
     }
     catch (err) {
         return 
@@ -22,7 +22,7 @@ export const deleteCourse = async (course_id) => {
 export const editCourse = async (course_id, course) => {
     try {
         var result = await axios.put(url + `/courses/${course_id}`, course,{withCredentials:true});
-        console.log(result)
+        
         if (result.data.status) {
             window.location = "/admin/courses/manage"
         }
@@ -48,7 +48,7 @@ export const getCourseDetailsById = (course_id) => async (disptach) => {
     }
 }
 export const getCoursesByLimit = (limit,search) => async (disptach) => {
-    console.log(search)   
+    
      try {
         var result = await axios.get(url + `/courses/limit/${limit}?search=${search}`,{withCredentials:true});       
          disptach({ type: "GET_COURSE_BY_LIMIT", payload: result.data })
@@ -59,8 +59,8 @@ export const getCoursesByLimit = (limit,search) => async (disptach) => {
 }
 export const getCoursesCount = async (setCoursesCount) => {
     try {
-        var result = await axios.get(url + `/courses/count`,{withCredentials:true});       
-         setCoursesCount(result.data);
+        var result = await axios.get(url + `/courses/count`,{withCredentials:true});    
+        setCoursesCount(result.data);
     }
     catch (err) {
         setCoursesCount(0)

@@ -4,6 +4,7 @@ import { url } from "../../assets/data";
 export const addCourse = async (course, setMessage) => {
     try {
         var result = await axios.post(url + "/courses", course,{withCredentials:true});
+    
         setMessage({ status: true, msg: result.data.msg });
     }
     catch (err) {
@@ -12,7 +13,7 @@ export const addCourse = async (course, setMessage) => {
 }
 export const deleteCourse = async (course_id) => {
     try {
-        var resul=await axios.delete(url + `/courses/${course_id}`,{withCredentials:true});
+       await axios.delete(url + `/courses/${course_id}`,{withCredentials:true});
         
     }
     catch (err) {
@@ -32,7 +33,9 @@ export const editCourse = async (course_id, course) => {
 }
 export const getAllCourses = (search) => async (disptach) => {
     try {
-        var result = await axios.get(url + `/courses?search=${search}`,{withCredentials:true});disptach({ type: "GET_ALL_COURSES", payload: result.data })
+        var result = await axios.get(url + `/courses?search=${search}`,{withCredentials:true});
+        
+        disptach({ type: "GET_ALL_COURSES", payload: result.data })
     }
     catch (err) {
         disptach({ type: "GET_ALL_COURSES", payload: [] })
@@ -40,21 +43,23 @@ export const getAllCourses = (search) => async (disptach) => {
 }
 export const getCourseDetailsById = (course_id) => async (disptach) => {
     try {
-        var result = await axios.get(url + `/courses/${course_id}`,{withCredentials:true});        
+        var result = await axios.get(url + `/courses/${course_id}`,{withCredentials:true});  
+      
         disptach({ type: "GET_COURSE_DETAIL_BY_ID", payload: result.data })
     }
     catch (err) {
         disptach({ type: "GET_COURSE_DETAIL_BY_ID", payload: {} })
     }
 }
-export const getCoursesByLimit = (limit,search) => async (disptach) => {
+export const getCoursesByLimit = async(limit,search,setCourses) =>{
     
      try {
         var result = await axios.get(url + `/courses/limit/${limit}?search=${search}`,{withCredentials:true});       
-         disptach({ type: "GET_COURSE_BY_LIMIT", payload: result.data })
+        setCourses({status:true,courses:result.data});
     }
     catch (err) {
-        disptach({ type: "GET_COURSE_By_LIMIT", payload: [] })
+        
+        setCourses({status:false,courses:[]})
     }
 }
 export const getCoursesCount = async (setCoursesCount) => {

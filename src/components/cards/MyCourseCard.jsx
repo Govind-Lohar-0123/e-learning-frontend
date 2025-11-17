@@ -1,8 +1,10 @@
 import { NavLink } from "react-router";
 import { removeMyCourse } from "../../redux/actions/myCourseAction";
+import { useSelector } from "react-redux";
 export default function MyCourseCard({ course }) {
+    const userData=useSelector((state)=>state.userData);
     function handleRemoveCourse() {
-        removeMyCourse(course.id,44);
+        removeMyCourse(course.id,userData.id);
     }
 
     return (

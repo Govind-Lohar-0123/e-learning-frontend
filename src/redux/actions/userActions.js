@@ -32,9 +32,7 @@ export async function userLogin(user, setMessage) {
         dispatch({type:"GET_USER",payload:resp.data});
     }
     catch (err) {
-        if(err?.response.data.msg=="Access Token Expired"){
-            refreshToAccessToken()
-        }
+    
        return;
     }
 }

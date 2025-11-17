@@ -1,24 +1,25 @@
 import axios from "axios";
 import { url } from "../../assets/data";
 export const addToMyCourse = async (course_id, user_id) => {
+   
     try {
-         await axios.post(url + `/mycourses/${course_id}/${user_id}`,{withCredentials:true});
+         await axios.post(url + `/mycourses/${course_id}/${user_id}`,{},{withCredentials:true});
         
         window.location = "/myprofile/mycourses"
     }
     catch (err) {
     }
 }
-export const getMyAllCourses = (search) => async (disptach) => {
-    var user_id = 44;
+export const getMyAllCourses = async (search,user_id,setMyCourses) =>{
+    console.log(user_id)
     try {
-        var result = await axios.get(url + `/mycourses/${user_id}?search=${search}`,{withCredentials:true});
+        const result = await axios.get(url + `/mycourses/${user_id}?search=${search}`,{withCredentials:true});
+        console.log(result)
+        setMyCourses({status:true,myCourses:result.data})
        
-        disptach({ type: "GET_MY_ALL_COURSES", payload: result.data })
     }
     catch (err) {
-       
-        disptach({ type: "GET_MY_ALL_COURSES", payload: [] })
+        setMyCourses({status:false,myCourses:[]})
     }
 }
 export const removeMyCourse = async (course_id,user_id) => {

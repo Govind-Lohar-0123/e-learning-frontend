@@ -24,7 +24,7 @@ export default function EditCourse() {
             });
         }
     }, [data]);
-
+    
 
     function handleEditCourse(e) {
        e.preventDefault();
@@ -37,10 +37,10 @@ export default function EditCourse() {
     }
     return (
         <>
-            {data.status ? (
+            {data?.status ? (
                 <div className="d-flex align-item-center my-5 justify-content-center w-100 h-50">
                     <div>
-                        {(message.status) ?
+                        {(message?.status) ?
                             <div class="alert alert-primary" role="alert">
                                 {message.message}
                             </div>
@@ -50,7 +50,7 @@ export default function EditCourse() {
                         <form>
                             <div className="card shadow" style={{ width: "25rem" }}>
                                 <img
-                                    src={`${process.env.PUBLIC_URL}/img/${data.course.image_url}`}
+                                    src={`${process.env.PUBLIC_URL}/img/${data?.course?.image_url}`}
                                     className="card-img-top"
                                     alt="course"
                                 />

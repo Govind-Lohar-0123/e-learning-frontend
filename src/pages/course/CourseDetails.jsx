@@ -1,6 +1,5 @@
-import { NavLink, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {getCourseDetailsById} from "../../redux/actions/courseAction.js";
 export default function CourseDetail() {
     var { course_id } = useParams();

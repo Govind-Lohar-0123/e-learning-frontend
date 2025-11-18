@@ -8,7 +8,7 @@ export default function EditCourse() {
     var [message, setMessage] = useState({ status: false, message: "" });
     const navigate=useNavigate();
     useEffect(() => {
-        getCourseDetailsById(course_id);
+        getCourseDetailsById(course_id,setCourse);
     }, [course_id]);
     
 
@@ -48,14 +48,14 @@ export default function EditCourse() {
                                 <div className="form-group">
                                     <label for="courseName">Name</label>
                                     <input type="text" className="form-control"                                         
-                                    onChange={(e) => setCourse({ status:true,course:{...course, name: e.target.value }})}
+                                    onChange={(e) => setCourse({ status:true,course:{...course.course, name: e.target.value }})}
                                     value={course.course.name} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
                                     
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="courseDuration">Duration</label>
                                     <input type="number" className="form-control" value={Number(course.course.duration)}
-                                        onChange={(e) => setCourse({ status:true,course:{...course, duration: e.target.value} })} id="courseDuration" placeholder="Duration"/>
+                                        onChange={(e) => setCourse({ status:true,course:{...course.course, duration: e.target.value} })} id="courseDuration" placeholder="Duration"/>
                                 </div>
                                </div>
                             </div>

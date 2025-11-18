@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import AllCourses from "./pages/course/AllCourses";
-import AllPremiumCourses from "./pages/premium-courses/AllPremiumCourses";
 import CourseDetail from "./pages/course/CourseDetails";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -16,10 +15,10 @@ import Courses from "./pages/admin/Courses/Courses";
 import EditCourse from "./pages/admin/Courses/EditCourse";
 import MyCourses from "./pages/profile/MyCourses";
 import Profile from "./pages/profile/Profile";
-import Feedback from "./pages/profile/Feedback";
-
 import { getCookie } from "./assets/cookieActions";
 import { getUser } from "./redux/actions/userActions";
+import PageNotFound from "./pages/notfound/NotFound";
+import AddCourse from "./pages/admin/Courses/AddCourse";
 
 function App() {
 
@@ -30,7 +29,7 @@ function App() {
   const isLogin = (token!="undefined" && token!=null && token!="") ? true : false;
   const role = userData?.role;
   
-  // Load user info when logged in
+  
   useEffect(() => {
     if (isLogin) {
       dispatch(getUser());
@@ -43,9 +42,8 @@ function App() {
       element: isLogin ? <Layout /> : <Navigate to="/login" />,
       children: [
         { index: true, element: <Home /> },
-        { path: "all-courses", element: <AllCourses /> },
-        { path: "premium/courses", element: <AllPremiumCourses /> },
-        { path: "course/details/:course_id", element: <CourseDetail /> },
+        { path: "courses", element: <AllCourses /> },
+        { path: "courses/:course_id", element: <CourseDetail /> },
       ],
     },
 
@@ -55,26 +53,31 @@ function App() {
 
     // User profile routes
     {
-      path: "/myprofile",
+      path: "/profile",
       element: isLogin ? <MyProfileLayout /> : <Navigate to="/login" />,
       children: [
         { index: true, element: <Profile /> },
         { path: "mycourses", element: <MyCourses /> },
-        { path: "feedback", element: <Feedback /> },
+        
       ],
     },
 
     // Admin routes
     {
       path: "/admin",
-      element:
-        isLogin && role === "Admin" ? <AdminLayout /> : <Navigate to="/login" />,
+      element: isLogin && role === "Admin" ? <AdminLayout /> : <Navigate to="/login" />,
       children: [
         { index: true, element: <AdminDashBoard /> },
-        { path: "courses/manage", element: <Courses /> },
-        { path: "edit/course/:course_id", element: <EditCourse /> },
+        { path: "courses", element: <Courses /> },
+        { path: "courses/edit/:course_id", element: <EditCourse /> },
+        { path: "courses/add", element: <AddCourse /> },
+        
       ],
     },
+    {
+      path:"*",
+      element:<PageNotFound/>
+    }
   ]);
 
   return <RouterProvider router={router} />;

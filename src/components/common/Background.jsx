@@ -4,7 +4,7 @@ export default function Background({ img }) {
 
 
     return <>
-        <Box>
+        <Box className="mx-auto w-75 h-75">
             <img src={`${process.env.PUBLIC_URL}/img/${img}.png`} className="w-100 h-100 d-block" alt="" />
         </Box>
     </>

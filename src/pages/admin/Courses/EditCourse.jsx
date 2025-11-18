@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { editCourse,getCourseDetailsById } from "../../../redux/actions/courseAction";
 
 export default function EditCourse() {
     const { course_id } = useParams();
     const [course, setCourse] = useState({ name: "", duration: "" });
     var [message, setMessage] = useState({ status: false, message: "" });
+    const navigate=useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,11 +30,15 @@ export default function EditCourse() {
     function handleEditCourse(e) {
        e.preventDefault();
       
-        if (course.name=="" || course.duration=="") {
-            setMessage({ status: true, message: "Please Fill All Field..." })
+        if (course.name=="" || course.duration=="" ) {
+            setMessage({ status: true, message: "Please fill all fields..." })
             return
         }
-        editCourse(course_id, course);
+        if(course.duration <=0){
+            setMessage({ status: true, message: "Duration must be positive" })
+            return
+        }
+        editCourse(course_id, course,navigate);
     }
     return (
         <>
@@ -41,7 +46,7 @@ export default function EditCourse() {
                 <div className="d-flex align-item-center my-5 justify-content-center w-100 h-50">
                     <div>
                         {(message?.status) ?
-                            <div class="alert alert-primary" role="alert">
+                            <div className="alert alert-primary" role="alert">
                                 {message.message}
                             </div>
                             : ""
@@ -51,26 +56,23 @@ export default function EditCourse() {
                             <div className="card shadow" style={{ width: "25rem" }}>
                                 <img
                                     src={`${process.env.PUBLIC_URL}/img/${data?.course?.image_url}`}
-                                    className="card-img-top"
+                                    className="course-img mx-auto" style={{objectFit:"contain"}}
                                     alt="course"
                                 />
-                                <div className="card-body">
-                                    <input
-                                        type="text"
-                                        className="form-control mb-2"
-                                        value={course.name}
-                                        onChange={(e) => setCourse({ ...course, name: e.target.value })}
-                                        placeholder="Course Name"
-                                    />
-
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        value={course.duration}
-                                        onChange={(e) => setCourse({ ...course, duration: e.target.value })}
-                                        placeholder="Course Duration"
-                                    />
+                                <div className="p-5">
+                                <div className="form-group">
+                                    <label for="courseName">Name</label>
+                                    <input type="text" className="form-control"                                         
+                                    onChange={(e) => setCourse({ ...course, name: e.target.value })}
+                                    value={course.name} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
+                                    
                                 </div>
+                                <div className="form-group mt-3">
+                                    <label for="courseDuration">Duration</label>
+                                    <input type="number" className="form-control" value={Number(course.duration)}
+                                        onChange={(e) => setCourse({ ...course, duration: e.target.value })} id="courseDuration" placeholder="Duration"/>
+                                </div>
+                               </div>
                             </div>
                             <button type="submit" onClick={handleEditCourse} style={{ border: "none" }} className="px-4 py-2 my-2 bg-primary mx-auto w-100 text-white text-center "> SUBMIT</button>
                         </form>

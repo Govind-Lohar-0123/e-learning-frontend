@@ -23,10 +23,7 @@ export default function Profile() {
                     <label for="exampleInputEmail1">Email</label>
                     <input type="email" readOnly value={user.email} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Role</label>
-                    <input type="text" readOnly value={user.role} className="form-control" id="exampleInputPassword1" placeholder="Password" />
-                </div>
+              
 
             </form>
 

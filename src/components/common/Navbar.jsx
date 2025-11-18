@@ -28,11 +28,7 @@ export default function Navbar() {
                                     <NavLink to="/" className="nav-link active text-bold" aria-current="page" href="#">Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink to="/all-courses" className="nav-link text-bold" href="#">Courses</NavLink>
-                                </li>
-
-                                <li className="nav-item">
-                                    <NavLink to="/premium/courses" className="nav-link text-bold" href="#">Future Scope</NavLink>
+                                    <NavLink to="/courses" className="nav-link text-bold" href="#">Courses</NavLink>
                                 </li>
 
                             </ul>
@@ -65,8 +61,8 @@ export default function Navbar() {
                                     </li> :""
                                     }
                                     <li className="nav-item login ">
-                                        <NavLink to="/myprofile" className="nav-link active " aria-current="page" href="#">
-                                            <button type="button" className="btn  bg-primary text-white text-bold px-5">MYPROFILE </button>
+                                        <NavLink to="/profile" className="nav-link active " aria-current="page" href="#">
+                                            <button type="button" className="btn  bg-primary text-white text-bold px-5">MY PROFILE </button>
                                         </NavLink>
                                     </li>
 

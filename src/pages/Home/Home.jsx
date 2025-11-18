@@ -1,18 +1,17 @@
 
-import { list1, list2 } from "../../assets/data.js";
 import Background from "../../components/common/Background.jsx";
-import Layer from "./Layer";
 import Courses from "../course/Courses.jsx";
-import Feedback from "../feedback/Feedback.jsx";
-
 export default function Home() {
 
-    return (<>
+    return <div>
+        <div className="bg-dark text-white py-2 ">
+            <marquee behavior="scroll" direction="left" style={{ fontSize: "1.2rem" }}>
+                🎓 Welcome to <span className="text-warning fw-bold">iSchool</span> — Learn, Build, and Grow!
+            </marquee>
+        </div>
         <Background img={"bg1"} />
-        <Layer list={list1} />
         <Courses />
-        <Feedback/>
-        <Layer list={list2} />
-     </>
-    )
+    
+      
+     </div>
 }

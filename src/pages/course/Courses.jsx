@@ -22,7 +22,7 @@ export default function Courses() {
                     }))}
                 </div>
                 <div>
-                    <NavLink to="all-courses" style={{ textDecoration: "none" }}><button type="button" className="btn btn-primary text-bold mx-auto d-block w-50 my-5" >View All Courses</button></NavLink>
+                    <NavLink to="/courses" style={{ textDecoration: "none" }}><button type="button" className="btn btn-primary text-bold mx-auto d-block w-50 my-5" >View All Courses</button></NavLink>
                 </div>
             </div>
             : <div>

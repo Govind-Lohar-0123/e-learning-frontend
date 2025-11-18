@@ -15,9 +15,9 @@ export default function LeftSide() {
                     </div>
                     <div className="mt-5">
                         <ul className="shadow list-group d-flex flex-dir-col align-items-space-between gap-3">
-                            <NavLink to="/myprofile"className="text-bold list-group-item bg-primary">Profile</NavLink>
-                            <NavLink to="mycourses"className="text-bold list-group-item bg-primary">MyCourses</NavLink>
-                            <NavLink to="feedback"className="text-bold shadow list-group-item bg-primary">Feedback</NavLink>
+                            <NavLink to="/profile"className="text-bold list-group-item bg-primary">Profile</NavLink>
+                            <NavLink to="mycourses"className="text-bold list-group-item bg-primary">My Courses</NavLink>
+                           
                            
                         </ul>
                     </div>

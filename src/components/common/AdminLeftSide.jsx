@@ -9,7 +9,7 @@ return (<div className="bg-secondary p-3  h-100" style={{  maxWidth: "300px" }}>
                     <div className="mt-5">
                         <ul className="list-group d-flex flex-dir-col align-items-space-between gap-3">
                             <NavLink to="/admin"className="list-group-item bg-primary">Admin DashBoard</NavLink>
-                            <NavLink to="courses/manage"className="list-group-item bg-primary">Courses Management</NavLink>
+                            <NavLink to="courses"className="list-group-item bg-primary">Course Management</NavLink>
                            
                         </ul>
                     </div>

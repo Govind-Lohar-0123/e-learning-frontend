@@ -1,44 +1,51 @@
 import axios from "axios";
-import { url } from "../../assets/data";
+import {  removeMsg, url } from "../../assets/data";
 // FOR COURSES 
-export const addCourse = async (course, setMessage) => {
+
+
+
+export const addCourse = async (course,navigate) => {
     try {
-        var result = await axios.post(url + "/courses", course,{withCredentials:true});
-    
-        setMessage({ status: true, msg: result.data.msg });
+       await axios.post(url + "/courses", course,{withCredentials:true});
+       navigate("/admin/courses");
+        
+
     }
     catch (err) {
-        setMessage({ status: true, msg: "Server Error " });
+        throw new Error("Failed to Add Course")
     }
 }
-export const deleteCourse = async (course_id) => {
+export const deleteCourse = async (course_id,navigate) => {
     try {
-       await axios.delete(url + `/courses/${course_id}`,{withCredentials:true});
+        await axios.delete(url + `/courses/${course_id}`, { withCredentials: true });
+        navigate(0)
+    }
+    catch (err) {
+         throw new Error("Failed to delete course");
+    }
+}
+
+export const editCourse = async (course_id, course,navigate) => {
+
+    try {
+        await axios.put(url + `/courses/${course_id}`, course,{withCredentials:true});
+        navigate("/admin/courses");
         
     }
     catch (err) {
-        return 
-    }
-}
-export const editCourse = async (course_id, course) => {
-    try {
-        var result = await axios.put(url + `/courses/${course_id}`, course,{withCredentials:true});
         
-        if (result.data.status) {
-            window.location = "/admin/courses/manage"
-        }
-    }
-    catch (err) {
     }
 }
-export const getAllCourses = (search) => async (disptach) => {
+export const getAllCourses = async (search,setAllCourses) => {
     try {
+        
         var result = await axios.get(url + `/courses?search=${search}`,{withCredentials:true});
+       
+        setAllCourses({status:true,courses:result.data});
         
-        disptach({ type: "GET_ALL_COURSES", payload: result.data })
     }
     catch (err) {
-        disptach({ type: "GET_ALL_COURSES", payload: [] })
+       setAllCourses({status:false,courses:[]});
     }
 }
 export const getCourseDetailsById = (course_id) => async (disptach) => {

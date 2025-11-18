@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import MyCourseCard from "../../components/cards/MyCourseCard";
 import { useEffect, useState } from "react";
 import { getMyAllCourses } from "../../redux/actions/myCourseAction";

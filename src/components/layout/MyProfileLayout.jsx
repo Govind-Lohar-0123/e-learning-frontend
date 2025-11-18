@@ -9,9 +9,6 @@ export default function MyProfileLayout() {
         <>
             <Header />
             <div >
-                <div>
-                    <h3 className="text-white bg-primary text-center p-2 m-0 ">My Profile </h3>
-                </div>
                 <div className="d-flex w-100 " style={{ height: "85vh" }}>
                     <MyProfileLeftSide />
                     <Outlet />

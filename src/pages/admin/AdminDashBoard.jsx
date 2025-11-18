@@ -4,6 +4,7 @@ import { getUsersCount } from "../../redux/actions/userActions";
 export default function AdminDashBoard() {   
     var [usersCount, setUsersCount] = useState(0);
     var [coursesCount, setCoursesCount] = useState(0);
+    
     useEffect(() => {
         getCoursesCount(setCoursesCount);
         getUsersCount(setUsersCount);

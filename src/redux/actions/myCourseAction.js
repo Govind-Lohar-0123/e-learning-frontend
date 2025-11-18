@@ -4,7 +4,6 @@ export const addToMyCourse = async (course_id, user_id,setMessage) => {
    
     try {
         const result=await axios.post(url + `/mycourses/${course_id}/${user_id}`,{},{withCredentials:true});
-       
         setMessage({...result.data,status:true})
         removeMsg(setMessage)
        

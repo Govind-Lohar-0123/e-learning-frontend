@@ -1,13 +1,16 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { addToMyCourse } from "../../redux/actions/myCourseAction";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-export default function CourseCard({ course }) {
+export default function CourseCard({ course,isAdd }) {
     const userData=useSelector((state)=>state.userData);
     const [message,setMessage]=useState({status:false,message:""});
+    const navigate=useNavigate();
     function handleAddToMyCourse() {
         addToMyCourse(course.id,userData.id ,setMessage);
+        navigate(0)
     }
+    
     return (
         <div className="card" style={{ width: "25rem" }}>
             {(message.status) ?
@@ -27,7 +30,7 @@ export default function CourseCard({ course }) {
             <ul className="list-group list-group-flush text-center align-items-center" >
                 <li className="list-group-item w-100"><NavLink to={course.link} className="text-deco-none"><button type="button" style={{ width: "100%" }} className="btn btn-danger  d-block text-bold" >Documentation</button></NavLink></li>
                 <li className="list-group-item w-100"> <NavLink to={`/courses/${course.id}`} className="text-deco-none"><button type="button" style={{ width: "100%" }} className="btn btn-secondary d-block text-bold">Details </button> </NavLink></li>
-                <li className="list-group-item w-100"><button type="button" onClick={handleAddToMyCourse} style={{ width: "100%" }} className="btn btn-primary d-block text-bold">Add To My Course</button></li>
+              {isAdd ? "" :<li className="list-group-item w-100"><button type="button" onClick={handleAddToMyCourse} style={{ width: "100%" }} className="btn btn-primary d-block text-bold">Add To My Course</button></li>}
             </ul>
         </div>
     )

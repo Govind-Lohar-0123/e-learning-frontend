@@ -1,7 +1,6 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import AllCourses from "./pages/course/AllCourses";

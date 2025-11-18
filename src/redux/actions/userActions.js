@@ -32,6 +32,7 @@ export async function userLogin(user, setMessage) {
         dispatch({type:"GET_USER",payload:resp.data});
     }
     catch (err) {
+        dispatch({type:"GET_USER",payload:{}});
     
        return;
     }
@@ -66,26 +67,6 @@ export const getUsersCount = async (setUsersCount) => {
         setUsersCount(0)
     }
 }
-
-
-
-
-
-
-export async function refreshToAccessToken() {
-    
-    try {
-        const result=await axios.get("http://localhost:8000/refresh",{withCredentials:true});
-        
-    }
-    catch (err) {
-        if(err?.response.status==401){
-            console.log(err)
-            // logout();
-        }
-    }
-}
-
 export async function logout(){
     removeAccessToken();
     try{

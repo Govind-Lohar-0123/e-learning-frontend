@@ -8,8 +8,6 @@ export const addCourse = async (course,navigate) => {
     try {
        await axios.post(url + "/courses", course,{withCredentials:true});
        navigate("/admin/courses");
-        
-
     }
     catch (err) {
         throw new Error("Failed to Add Course")
@@ -40,7 +38,7 @@ export const getAllCourses = async (search,setAllCourses) => {
     try {
         
         var result = await axios.get(url + `/courses?search=${search}`,{withCredentials:true});
-       
+        
         setAllCourses({status:true,courses:result.data});
         
     }
@@ -62,6 +60,7 @@ export const getCoursesByLimit = async(limit,search,setCourses) =>{
     
      try {
         var result = await axios.get(url + `/courses/limit/${limit}?search=${search}`,{withCredentials:true});       
+       
         setCourses({status:true,courses:result.data});
     }
     catch (err) {

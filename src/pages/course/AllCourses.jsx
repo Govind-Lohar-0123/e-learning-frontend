@@ -3,16 +3,24 @@ import CourseCard from "../../components/cards/CourseCard"
 import { getAllCourses } from "../../redux/actions/courseAction";
 import { useState, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
+import { getMyAllCourses } from "../../redux/actions/myCourseAction";
+import { useSelector } from "react-redux";
 export default function AllCourses() {
     const [search, setSearch] = useState("");
     const [courses,setCourses]=useState({status:false,courses:[]});
+    const userData=useSelector((state)=>state.userData);
+    const [myCourses,setMyCourses]=useState({status:false,myCourses:[]})
     useEffect(() => {
         getAllCourses(search,setCourses);
     }, [search,setCourses])
     
+    useEffect(() => {
+        if(userData)getMyAllCourses(search,userData.id,setMyCourses);
+      }, [userData])
+ 
     
     return <div>
-        {(courses?.status) ?
+        {(courses?.status && myCourses?.status) ?
             <div className="p-5">
                 <div>
                     <Background img={"bg2"} />
@@ -23,7 +31,8 @@ export default function AllCourses() {
                     </div>
                     <div className="d-flex align-items-center justify-content-center flex-wrap mt-2 gap-4">
                         {(courses?.courses.map((course, idx) => {
-                            return <CourseCard key={idx} course={course} />
+                            let isAdd=myCourses.myCourses.some((myCourse,idx)=>myCourse.id==course.id);
+                            return <CourseCard key={idx} isAdd={isAdd}course={course} />
                         }))}
                     </div>
                     <div>

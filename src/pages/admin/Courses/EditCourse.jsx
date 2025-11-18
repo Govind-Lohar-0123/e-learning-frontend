@@ -1,30 +1,15 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { editCourse,getCourseDetailsById } from "../../../redux/actions/courseAction";
 
 export default function EditCourse() {
     const { course_id } = useParams();
-    const [course, setCourse] = useState({ name: "", duration: "" });
+    const [course, setCourse] = useState({status:false,course:{}});
     var [message, setMessage] = useState({ status: false, message: "" });
     const navigate=useNavigate();
-    const dispatch = useDispatch();
-
     useEffect(() => {
-        dispatch(getCourseDetailsById(course_id));
-    }, [dispatch, course_id]);
-
-    const data = useSelector((state) => state.courseData);
-
-    
-    useEffect(() => {
-        if (data?.status && data?.course) {
-            setCourse({
-                name: data.course.name || "",
-                duration: data.course.duration || "",
-            });
-        }
-    }, [data]);
+        getCourseDetailsById(course_id);
+    }, [course_id]);
     
 
     function handleEditCourse(e) {
@@ -42,7 +27,7 @@ export default function EditCourse() {
     }
     return (
         <>
-            {data?.status ? (
+            {course?.status ? (
                 <div className="d-flex align-item-center my-5 justify-content-center w-100 h-50">
                     <div>
                         {(message?.status) ?
@@ -55,7 +40,7 @@ export default function EditCourse() {
                         <form>
                             <div className="card shadow" style={{ width: "25rem" }}>
                                 <img
-                                    src={`${process.env.PUBLIC_URL}/img/${data?.course?.image_url}`}
+                                    src={`${process.env.PUBLIC_URL}/img/${course?.course?.image_url}`}
                                     className="course-img mx-auto" style={{objectFit:"contain"}}
                                     alt="course"
                                 />
@@ -63,14 +48,14 @@ export default function EditCourse() {
                                 <div className="form-group">
                                     <label for="courseName">Name</label>
                                     <input type="text" className="form-control"                                         
-                                    onChange={(e) => setCourse({ ...course, name: e.target.value })}
-                                    value={course.name} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
+                                    onChange={(e) => setCourse({ status:true,course:{...course, name: e.target.value }})}
+                                    value={course.course.name} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
                                     
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="courseDuration">Duration</label>
-                                    <input type="number" className="form-control" value={Number(course.duration)}
-                                        onChange={(e) => setCourse({ ...course, duration: e.target.value })} id="courseDuration" placeholder="Duration"/>
+                                    <input type="number" className="form-control" value={Number(course.course.duration)}
+                                        onChange={(e) => setCourse({ status:true,course:{...course, duration: e.target.value} })} id="courseDuration" placeholder="Duration"/>
                                 </div>
                                </div>
                             </div>

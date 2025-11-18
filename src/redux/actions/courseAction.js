@@ -1,26 +1,19 @@
 import axios from "axios";
-import {  removeMsg, url } from "../../assets/data";
+import {  url } from "../../assets/data";
 // FOR COURSES 
-
-
-
 export const addCourse = async (course,navigate) => {
     try {
        await axios.post(url + "/courses", course,{withCredentials:true});
        navigate("/admin/courses");
     }
-    catch (err) {
-        throw new Error("Failed to Add Course")
-    }
+    catch (err) {}
 }
 export const deleteCourse = async (course_id,navigate) => {
     try {
         await axios.delete(url + `/courses/${course_id}`, { withCredentials: true });
         navigate(0)
     }
-    catch (err) {
-         throw new Error("Failed to delete course");
-    }
+    catch (err) {}
 }
 
 export const editCourse = async (course_id, course,navigate) => {
@@ -28,11 +21,8 @@ export const editCourse = async (course_id, course,navigate) => {
     try {
         await axios.put(url + `/courses/${course_id}`, course,{withCredentials:true});
         navigate("/admin/courses");
-        
     }
-    catch (err) {
-        
-    }
+    catch (err) {}
 }
 export const getAllCourses = async (search,setAllCourses) => {
     try {
@@ -46,14 +36,13 @@ export const getAllCourses = async (search,setAllCourses) => {
        setAllCourses({status:false,courses:[]});
     }
 }
-export const getCourseDetailsById = (course_id) => async (disptach) => {
+export const getCourseDetailsById = async(course_id,setCourse) =>{
     try {
         var result = await axios.get(url + `/courses/${course_id}`,{withCredentials:true});  
-      
-        disptach({ type: "GET_COURSE_DETAIL_BY_ID", payload: result.data })
+        setCourse({status:true,course:result.data});
     }
     catch (err) {
-        disptach({ type: "GET_COURSE_DETAIL_BY_ID", payload: {} })
+         setCourse({status:true,course:{}});
     }
 }
 export const getCoursesByLimit = async(limit,search,setCourses) =>{

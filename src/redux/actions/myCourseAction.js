@@ -1,7 +1,6 @@
 import axios from "axios";
 import { removeMsg, url } from "../../assets/data";
 export const addToMyCourse = async (course_id, user_id,setMessage) => {
-   
     try {
         const result=await axios.post(url + `/mycourses/${course_id}/${user_id}`,{},{withCredentials:true});
         setMessage({...result.data,status:true})
@@ -9,8 +8,6 @@ export const addToMyCourse = async (course_id, user_id,setMessage) => {
        
     }
     catch (err) {
-        
-        return
     }
 }
 export const getMyAllCourses = async (search,user_id,setMyCourses) =>{
@@ -32,7 +29,7 @@ export const removeMyCourse = async (course_id,user_id,navigate) => {
       navigate(0)
     }
     catch (err) {
-       throw new Error(err.message)
+       navigate(0)
     }
     
 }

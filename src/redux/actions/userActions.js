@@ -2,30 +2,38 @@ import { removeMsg } from "../../assets/data";
 import axios from "axios";
 import { url } from "../../assets/data";
 import { removeAccessToken } from "../../assets/cookieActions";
-export async function userLogin(user, setMessage) {
-    try {
-        const resp = await axios.post(url + "/login", user,{withCredentials:true});
-       
-        if (resp.data.status) {            
-            if (resp.data.roleId== 1) { 
-                window.location ="/";
-            }
-            else { // admin user
-                window.location = "/admin";
-            }
-        }
-        else {
-            setMessage({ status: true, msg: resp.data.msg });
-            removeMsg(setMessage);
-            return;
-        }
+
+
+export async function userLogin(user, setMessage, navigate) {
+  try {
+    const resp = await axios.post(`${url}/login`, user, {
+      withCredentials: true,
+    });
+
+    
+    if (resp.data?.status) {
+      const roleId = resp.data.roleId;
+
+      
+      if (roleId === 1) {
+        window.location="/"
+      } else {
+        window.location="/admin"
+      }
+      return;
     }
-    catch (err) {
-        setMessage({ status: true, msg: err?.message });
-        removeMsg(setMessage);
-        return;
-    }
-}export const getUser= ()=> async(dispatch)=>{
+
+   
+    setMessage({ status: true, msg: resp.data?.msg || "Login failed" });
+    removeMsg(setMessage);
+
+  } catch (err) {const errorMsg ="Something went wrong. Please try again.";
+    setMessage({ status: true, msg: errorMsg });
+    removeMsg(setMessage);
+  }
+}
+
+export const getUser= ()=> async(dispatch)=>{
     
     try {
         const resp = await axios.get(url + `/users`,{withCredentials:true});
@@ -34,29 +42,23 @@ export async function userLogin(user, setMessage) {
     catch (err) {
         dispatch({type:"GET_USER",payload:{}});
     
-       return;
     }
 }
 export async function userRegister(user, setMessage) {    
     try {
         const resp = await axios.post(url + "/register", user,{withCredentials:true});
         
-        if (resp.data.status) {
-            await getUser();
-            window.location = "/";
-
-        }
+        if (resp.data.status)window.location = "/";
         else {
             setMessage({ status: true, msg: resp.data.msg });
             removeMsg(setMessage);
             return;
         }
     }
-    catch (err) {
-        setMessage({ status: true, msg: "Server Error", err });
-        removeMsg(setMessage);
-        return;
-    }
+    catch (err) {const errorMsg ="Something went wrong. Please try again.";
+    setMessage({ status: true, msg: errorMsg });
+    removeMsg(setMessage);
+  }
 }
 export const getUsersCount = async (setUsersCount) => {
     try {

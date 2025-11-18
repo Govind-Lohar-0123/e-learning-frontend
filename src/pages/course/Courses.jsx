@@ -14,7 +14,7 @@ export default function Courses() {
     }, [search,userData])    
  
     useEffect(() => {
-        if(userData)getMyAllCourses(search,userData.id,setMyCourses);
+        if(Object.keys(userData).length>0)getMyAllCourses(search,userData.id,setMyCourses);
     }, [userData])
 
     

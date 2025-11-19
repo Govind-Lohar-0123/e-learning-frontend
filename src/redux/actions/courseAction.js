@@ -17,6 +17,7 @@ export const deleteCourse = async (course_id,navigate) => {
 }
 
 export const editCourse = async (course_id, course,navigate) => {
+   
 
     try {
         await axios.put(url + `/courses/${course_id}`, course,{withCredentials:true});

@@ -1,14 +1,25 @@
+import { useState } from "react";
 import { testCourse } from "../../../assets/data";
 import { addCourse } from "../../../redux/actions/courseAction";
 import { useNavigate } from "react-router";
 
 export default function AddCourse() {
     const navigate=useNavigate();
+    const [course,setCourse]=useState({topics:[]});
+    const [topic,setTopic]=useState("");
     function addCourseHandle(e) {
        e.preventDefault();
        addCourse(testCourse,navigate)
-      
     }
+
+    function addTopicHandle(e){
+       
+        if(topic){
+           setCourse({...course,course:course.topics.push(topic)})
+        }
+       setTopic("");
+    }
+   
     return <div className="d-flex align-item-center my-5 mx-auto justify-content-center " style={{ height: "85vh", overflow: "auto" }}>
                     <div className="w-100">
                        
@@ -16,36 +27,50 @@ export default function AddCourse() {
                         <form>
                             <div className="card shadow" style={{ width: "100%" }}>
                                 <img 
-                                    src={`${process.env.PUBLIC_URL}/img/${testCourse.image_url}`}
+                                    src={`${process.env.PUBLIC_URL}/img/${course.image_url}`}
                                     className="course-img mx-auto" style={{objectFit:"contain"}}
                                     alt="course"
                                 />
                                 <div className="p-5">
                                 <div className="form-group">
-                                    <label for="courseName">Name</label>
-                                    <input type="text" readOnly className="form-control"                                         
+                                    <label for="courseName">Image Name</label>
+                                    <input type="text" onChange={(e)=>setCourse({...course,image_url:e.target.value})}  className="form-control"                                         
                                    
-                                    value={testCourse.name} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
+                                    value={course?.image_url} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
+                                    
+                                </div>
+                                <div className="form-group">
+                                    <label for="courseName">Name</label>
+                                    <input type="text" onChange={(e)=>setCourse({...course,name:e.target.value})}  className="form-control"                                         
+                                   
+                                    value={course?.name} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
                                     
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="courseDuration">Description</label>
-                                    <input type="text" readOnly className="form-control" value={testCourse.description}
+                                    <input type="text" onChange={(e)=>setCourse({...course,description:e.target.value})} className="form-control" value={course?.description}
                                     id="courseDuration" placeholder="Duration"/>
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="courseDuration">Duration</label>
-                                    <input type="number" readOnly className="form-control" value={testCourse.duration}
+                                    <input type="number" onChange={(e)=>setCourse({...course,duration:e.target.value})} className="form-control" value={course?.duration}
                                     id="courseDuration" placeholder="Duration"/>
                                 </div>
                                 <div className="form-group mt-3">
                                     <label for="courseDuration">Documentation Link</label>
-                                    <input type="text" readOnly className="form-control" value={testCourse.link}
+                                    <input type="text" onChange={(e)=>setCourse({...course,link:e.target.value})} className="form-control" value={course?.link}
                                     id="courseDuration" placeholder="Duration"/>
+                                </div>
+                                <div className="form-group mt-3">
+                                    <label for="courseDuration"> Add Topic</label>
+                                    <input type="text"  className="form-control" defaultValue={topic} onChange={(e)=>setTopic(e.target.value)}
+                                    id="courseDuration" placeholder="Duration" />
+                                    <button type="button" onClick={addTopicHandle} className="bg-primary p-2 px-4 mx-auto my-4 text-white">Add Topic</button>
                                 </div>
                                 <div className="form-group mt-3 w-100">
                                     <div className="my-5 w-100">
-                                        <h3 className="text-center bg-danger w-100 m-auto text-white p-3 rounded">Topic Which You Will Learn In {testCourse.name} Course</h3>
+
+                                        <h3 className="text-center bg-danger w-100 m-auto text-white p-3 rounded">Topic Which You Will Learn In {course?.name} Course</h3>
                                         <div className="w-75 border m-auto my-5">
                                             <table className="text-center table table-hover ">
                                                 <thead>
@@ -56,14 +81,12 @@ export default function AddCourse() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        testCourse?.topics?.map((topic, idx) => {
-                                                            return (<>
-                                                                <tr key={idx}>
+                                                        course?.topics?.map((topic, idx) => {
+                                                            return<tr key={idx}>
                                                                     <th scope="row">{idx + 1}</th>
                                                                     <td>{topic}</td>
                                                                 </tr>
-                                                            </>)
-                                                        })
+                                                            })
                                                     }
                                                 </tbody>
                                             </table>

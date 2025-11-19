@@ -15,15 +15,15 @@ export default function EditCourse() {
     function handleEditCourse(e) {
        e.preventDefault();
       
-        if (course.name=="" || course.duration=="" ) {
+        if (course?.course?.name=="" || course?.course?.duration=="" ) {
             setMessage({ status: true, message: "Please fill all fields..." })
             return
         }
-        if(course.duration <=0){
+        if(course?.course?.duration <=0){
             setMessage({ status: true, message: "Duration must be positive" })
             return
         }
-        editCourse(course_id, course,navigate);
+        editCourse(course_id,{name:course?.course?.name,duration:course?.course?.duration},navigate);
     }
     return (
         <>

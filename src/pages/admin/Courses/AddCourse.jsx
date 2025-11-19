@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 export default function AddCourse() {
     const navigate=useNavigate();
-    const [course,setCourse]=useState({topics:[]});
+    const [course,setCourse]=useState({image_url:"ProgLang/java.png",topics:[]});
     const [topic,setTopic]=useState("");
     function addCourseHandle(e) {
        e.preventDefault();

@@ -15,8 +15,8 @@ export default function EditCourse() {
     function handleEditCourse(e) {
        e.preventDefault();
       
-        if (course?.course?.name=="" || course?.course?.duration=="" ) {
-            setMessage({ status: true, message: "Please fill all fields..." })
+        if (course?.course?.name=="") {
+            setMessage({ status: true, message: "Please Fill Field..." })
             return
         }
         if(course?.course?.duration <=0){

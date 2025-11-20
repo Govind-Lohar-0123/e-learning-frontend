@@ -1,9 +1,11 @@
 import axios from "axios";
-import {  url } from "../../assets/data";
+
+
+const url=process.env.REACT_APP_API_URL;
 // FOR COURSES 
 export const addCourse = async (course,navigate) => {
     try {
-       await axios.post(url + "/courses", course,{withCredentials:true});
+       await axios.post( url + "/courses", course,{withCredentials:true});
        navigate("/admin/courses");
     }
     catch (err) {}

@@ -1,5 +1,7 @@
 import axios from "axios";
-import { removeMsg, url } from "../../assets/data";
+import { removeMsg } from "../../assets/data";
+
+const url=process.env.REACT_APP_API_URL;
 export const addToMyCourse = async (course_id, user_id,setMessage) => {
     try {
         const result=await axios.post(url + `/mycourses/${course_id}/${user_id}`,{},{withCredentials:true});

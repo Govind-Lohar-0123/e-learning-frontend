@@ -1,8 +1,8 @@
 import { removeMsg } from "../../assets/data";
 import axios from "axios";
-import { url } from "../../assets/data";
 import { removeAccessToken } from "../../assets/cookieActions";
 
+const url=process.env.REACT_APP_API_URL;
 
 export async function userLogin(user, setMessage, navigate) {
   try {

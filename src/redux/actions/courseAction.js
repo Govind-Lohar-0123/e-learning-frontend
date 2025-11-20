@@ -1,7 +1,6 @@
 import axios from "axios";
-
-
 const url=process.env.REACT_APP_API_URL;
+
 // FOR COURSES 
 export const addCourse = async (course,navigate) => {
     try {

@@ -19,6 +19,7 @@ import { getUser } from "./redux/actions/userActions";
 import PageNotFound from "./pages/notfound/NotFound";
 import AddCourse from "./pages/admin/Courses/AddCourse";
 
+
 function App() {
 
   const dispatch = useDispatch();

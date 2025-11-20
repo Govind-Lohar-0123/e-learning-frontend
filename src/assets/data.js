@@ -1,5 +1,4 @@
 
-// export let url = "https://e-learning-server-k5gt.onrender.com";
 export let url = "http://localhost:8000";
 export function removeMsg(setMsg) {
     setTimeout(() => {

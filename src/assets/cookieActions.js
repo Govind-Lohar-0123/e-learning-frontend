@@ -1,6 +1,9 @@
 export function removeRole() {
     document.cookie = `role=; expires=${new Date(0).toUTCString()}; path=/`;
 }
+export function setAccessToken(accessToken){
+    document.cookie=`accessToken=${accessToken}`;
+}
 export function removeAccessToken() {
     document.cookie = `accessToken=; expires=${new Date(0).toUTCString()}; path=/`;
 }export function getCookie(key) {

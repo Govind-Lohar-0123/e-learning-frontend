@@ -1,25 +1,23 @@
 import { removeMsg } from "../../assets/data";
 import axios from "axios";
-import { removeAccessToken } from "../../assets/cookieActions";
+import { removeAccessToken, setAccessToken } from "../../assets/cookieActions";
 
 const url=process.env.REACT_APP_API_URL;
 
-export async function userLogin(user, setMessage, navigate) {
+export async function userLogin(user, setMessage,navigate) {
   try {
     const resp = await axios.post(`${url}/login`, user, {
       withCredentials: true,
     });
-
-    
-    
+     
     if (resp.data?.status) {
       const roleId = resp.data.role;
 
-      
+       setAccessToken(resp.data.accessToken);
       if (roleId === 1) {
-        window.location="/"
+       window.location.href="/"
       } else {
-        window.location="/admin"
+       window.location.href="/admin"
       }
       return;
     }
@@ -28,7 +26,9 @@ export async function userLogin(user, setMessage, navigate) {
     setMessage({ status: true, msg: resp.data?.msg || "Login failed" });
     removeMsg(setMessage);
 
-  } catch (err) {const errorMsg ="Something went wrong. Please try again.";
+  } catch (err) {
+   
+    const errorMsg =err.message;
     setMessage({ status: true, msg: errorMsg });
     removeMsg(setMessage);
   }
@@ -56,7 +56,8 @@ export async function userRegister(user, setMessage) {
             return;
         }
     }
-    catch (err) {const errorMsg ="Something went wrong. Please try again.";
+    catch (err) {
+       const errorMsg =err.message;
     setMessage({ status: true, msg: errorMsg });
     removeMsg(setMessage);
   }

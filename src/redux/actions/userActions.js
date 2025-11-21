@@ -13,7 +13,7 @@ export async function userLogin(user, setMessage, navigate) {
     
     
     if (resp.data?.status) {
-      const roleId = resp.data.roleId;
+      const roleId = resp.data.role;
 
       
       if (roleId === 1) {

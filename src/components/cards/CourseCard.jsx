@@ -17,9 +17,7 @@ export default function CourseCard({ course, isAdd }) {
         <div class="alert alert-primary" role="alert">
           {message.msg}
         </div>
-      ) : (
-        ''
-      )}
+      ) : null}
       <div className="">
         <img
           src={`${process.env.REACT_APP_IMG_URL}/uploads/${course.image_url}`}
@@ -46,20 +44,17 @@ export default function CourseCard({ course, isAdd }) {
           </NavLink>
         </li>
         <li className="list-group-item w-100">
-          {' '}
           <NavLink to={`/courses/${course.id}`} className="text-deco-none">
             <button
               type="button"
               style={{ width: '100%' }}
               className="btn btn-secondary d-block text-bold"
             >
-              Details{' '}
-            </button>{' '}
+              Details
+            </button>
           </NavLink>
         </li>
-        {isAdd ? (
-          ''
-        ) : (
+        {isAdd ? null : (
           <li className="list-group-item w-100">
             <button
               type="button"

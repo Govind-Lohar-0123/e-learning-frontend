@@ -9,21 +9,27 @@ export const addCourse = async (course, navigate) => {
       },
     });
     navigate('/admin/courses');
-  } catch (err) {}
+  } catch (err) {
+     throw new Error("Add new course failed...")
+  }
 };
 
 export const deleteCourse = async (courseId, navigate) => {
   try {
     await axios.delete(`/courses/${courseId}`);
-    navigate(0);
-  } catch (err) {}
+   
+  } catch (err) {
+    throw new Error("Delete course failed...")
+  }
 };
 
 export const editCourse = async (courseId, course, navigate) => {
   try {
     await axios.put(`/courses/${courseId}`, course);
     navigate('/admin/courses');
-  } catch (err) {}
+  } catch (err) {
+     throw new Error("Edit course failed...")
+  }
 };
 
 export const getAllCourses = async (search, setAllCourses) => {

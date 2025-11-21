@@ -15,7 +15,7 @@ var passMsg = <>
 
 export default async function registerValidation(user, setMessage) {
     
-    for (var key in user) {
+    for (let key in user) {
 
         if (user[key] == "") {
             setMessage({ status: true, msg: "Please Fill All Field..." });
@@ -23,7 +23,6 @@ export default async function registerValidation(user, setMessage) {
             return false;
         }
     }
-
 
     if (!isValidText(user.name)) {
         setMessage({ status: true, msg: "Please Enter Valid Name " });

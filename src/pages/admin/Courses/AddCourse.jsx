@@ -1,24 +1,31 @@
 import { useState } from 'react';
-import { testCourse } from '../../../assets/data';
 import { addCourse } from '../../../redux/actions/courseAction';
 import { useNavigate } from 'react-router';
-
+import validateCourse from '../../../validation/courseValidation.js';
+import { removeMsg } from '../../../assets/data.js';
 export default function AddCourse() {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [message, setMessage] = useState({ status: false, message: '' });
 
   const [course, setCourse] = useState({
-    topics: ['1', '2'],
-    name: 'govif',
-    duration: 1,
-    description: 'fdfffd',
-    link: 'www.google.com',
+    topics: [],
+    name: '',
+    duration: '',
+    description: '',
+    link: '',
   });
 
   const [topic, setTopic] = useState('');
   function addCourseHandle(e) {
     e.preventDefault();
+    let isValid = validateCourse(course);
+    if (isValid.status == false) {
+      setMessage({ status: true, message: isValid?.msg });
+      removeMsg(setMessage);
+      return;
+    }
     const formData = new FormData();
 
     formData.append('name', course.name);
@@ -55,6 +62,11 @@ export default function AddCourse() {
     >
       <div className="w-100">
         <h3 className="text-center p-2 bg-danger text-white ">ADD COURSE</h3>
+        {message?.status ? (
+          <div className="alert alert-primary" role="alert">
+            {message.message}
+          </div>
+        ) : null}
         <form>
           <div className="card shadow" style={{ width: '100%' }}>
             <img

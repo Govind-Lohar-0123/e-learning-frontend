@@ -5,10 +5,9 @@ export default function Footer() {
         <div className="container">
           <h5 className="mb-1 fw-bold">E-Learning Management System</h5>
           <p className="small mb-2">
-            Empowering students through interactive learning and high-quality educational content.
+            Empowering students through interactive learning and high-quality
+            educational content.
           </p>
-
-          
         </div>
       </footer>
     </>

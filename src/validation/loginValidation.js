@@ -2,7 +2,7 @@ import { isValidEmail, isValidPassword } from '../validation/regularEx';
 import { removeMsg } from '../assets/data';
 
 export default async function loginValidation(user, setMessage) {
-  for (var key in user) {
+  for (let key in user) {
     if (user[key] == '') {
       setMessage({ status: true, msg: 'Please Fill All Field...' });
       removeMsg(setMessage);

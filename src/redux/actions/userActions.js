@@ -13,9 +13,9 @@ export async function userLogin(user, setMessage) {
       setRole(userRole);
 
       if (userRole !== 'Admin') {
-        window.location.href = '/';
+       window.location.href="/"
       } else {
-        window.location.href = '/admin';
+        window.location.href="/admin"
       }
       return;
     }

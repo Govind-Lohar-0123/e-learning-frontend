@@ -35,17 +35,16 @@ export default function AdminCourseCard({ course }) {
           </NavLink>
         </li>
         <li className="list-group-item w-100">
-          {' '}
           <button
             type="button"
             onClick={handleDeleteCourse}
             style={{ width: '100%' }}
             className="btn btn-secondary d-block text-bold"
           >
-            Delete{' '}
-          </button>{' '}
+            Delete
+          </button>
         </li>
-      </ul>{' '}
+      </ul>
     </div>
   );
 }

@@ -54,9 +54,7 @@ export default function Courses() {
             </NavLink>
           </div>
         </div>
-      ) : (
-        <div></div>
-      )}
+      ) : null}
     </div>
   );
 }

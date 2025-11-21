@@ -25,8 +25,9 @@ export const getMyAllCourses = async (search, userId, setMyCourses) => {
 export const removeMyCourse = async (courseId, userId, navigate) => {
   try {
     await axios.delete(`/mycourses/${courseId}/${userId}`);
-    navigate(0);
+    window.location.reload();
   } catch (err) {
-    navigate(0);
+    
   }
+  
 };

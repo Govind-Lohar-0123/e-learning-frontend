@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import loginValidation from '../../validation/loginValidation.js';
 import { userLogin } from '../../redux/actions/userActions.js';
-import { useNavigate } from 'react-router';
 
 const userInitialData = {
   email: '',
@@ -10,11 +9,10 @@ const userInitialData = {
 export default function Login() {
   const [user, setUser] = useState(userInitialData);
   const [message, setMessage] = useState({ status: false, msg: '' });
-  const navigate = useNavigate();
 
   async function loginHandle(e) {
     e.preventDefault();
-    var isValid = await loginValidation(user, setMessage, navigate);
+    var isValid = await loginValidation(user, setMessage);
     if (isValid) {
       userLogin(user, setMessage);
     }

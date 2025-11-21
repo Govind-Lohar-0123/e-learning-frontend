@@ -3,7 +3,7 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home/Home';

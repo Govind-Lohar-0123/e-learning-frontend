@@ -1,7 +1,5 @@
-import AdminNavbar from "./AdminNavbar";
-import Navbar from "./Navbar";
+import AdminNavbar from './AdminNavbar';
+
 export default function AdminHeader() {
-    return <AdminNavbar />
-            
-        
+  return <AdminNavbar />;
 }

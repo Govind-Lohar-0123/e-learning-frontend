@@ -46,12 +46,8 @@ function App() {
         { path: "courses/:course_id", element: <CourseDetail /> },
       ],
     },
-
-    // authentication
     { path: "login", element: !isLogin ? <Login /> : <Navigate to="/" /> },
     { path: "register", element: !isLogin ? <Register /> : <Navigate to="/" /> },
-
-    // User profile routes
     {
       path: "/profile",
       element: isLogin ? <MyProfileLayout /> : <Navigate to="/login" />,
@@ -61,8 +57,6 @@ function App() {
         
       ],
     },
-
-    // Admin routes
     {
       path: "/admin",
       element: isLogin && role === "Admin" ? <AdminLayout /> : <Navigate to="/login" />,

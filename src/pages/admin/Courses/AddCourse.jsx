@@ -34,7 +34,7 @@ export default function AddCourse() {
                                 <div className="p-5">
                                 <div className="form-group">
                                     <label for="courseName">Image Name</label>
-                                    <input type="text" onChange={(e)=>setCourse({...course,image_url:e.target.value})}  className="form-control"                                         
+                                    <input type="text" onChange={(e)=>setCourse({...course,image_url:e.target.value})} disabled className="form-control"                                         
                                    
                                     value={course?.image_url} id="courseName" aria-describedby="emailHelp" placeholder="Name"/>
                                     

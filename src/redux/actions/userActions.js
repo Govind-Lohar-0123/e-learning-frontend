@@ -1,81 +1,71 @@
-import { removeMsg } from "../../assets/data";
-import axios from "axios";
-import { removeAccessToken, setAccessToken } from "../../assets/cookieActions";
+import { removeMsg } from '../../assets/data';
+import axios from '../../api/apiClient';
+import { removeAccessToken, removeRole, setAccessToken, setRole } from '../../utils/localStorage';
 
-const url=process.env.REACT_APP_API_URL;
-
-export async function userLogin(user, setMessage,navigate) {
+export async function userLogin(user, setMessage) {
   try {
-    const resp = await axios.post(`${url}/login`, user, {
-      withCredentials: true,
-    });
-     
-    if (resp.data?.status) {
-      const roleId = resp.data.role;
+    const response = await axios.post('/login', user);
 
-       setAccessToken(resp.data.accessToken);
-      if (roleId === 1) {
-       window.location.href="/"
+    if (response.data?.status) {
+      const userRole = response.data.role;
+
+      setAccessToken(response.data.accessToken);
+      setRole(userRole);
+
+      if (userRole !== 'Admin') {
+        window.location.href = '/';
       } else {
-       window.location.href="/admin"
+        window.location.href = '/admin';
       }
       return;
     }
 
-   
-    setMessage({ status: true, msg: resp.data?.msg || "Login failed" });
+    setMessage({ status: true, msg: response.data?.msg || 'Login failed' });
     removeMsg(setMessage);
-
   } catch (err) {
-   
-    const errorMsg =err.message;
+    const errorMsg = err.message;
     setMessage({ status: true, msg: errorMsg });
     removeMsg(setMessage);
   }
 }
 
-export const getUser= ()=> async(dispatch)=>{
-    
-    try {
-        const resp = await axios.get(url + `/users`,{withCredentials:true});
-        dispatch({type:"GET_USER",payload:resp.data});
+export const getUser = () => async (dispatch) => {
+  try {
+    const response = await axios.get('/users');
+    dispatch({ type: 'GET_USER', payload: response.data });
+  } catch (err) {
+    dispatch({ type: 'GET_USER', payload: {} });
+  }
+};
+
+export async function userRegister(user, setMessage) {
+  try {
+    const response = await axios.post('/register', user);
+
+    if (response.data.status) window.location = '/';
+    else {
+      setMessage({ status: true, msg: response.data.msg });
+      removeMsg(setMessage);
+      return;
     }
-    catch (err) {
-        dispatch({type:"GET_USER",payload:{}});
-    
-    }
-}
-export async function userRegister(user, setMessage) {    
-    try {
-        const resp = await axios.post(url + "/register", user,{withCredentials:true});
-        
-        if (resp.data.status)window.location = "/";
-        else {
-            setMessage({ status: true, msg: resp.data.msg });
-            removeMsg(setMessage);
-            return;
-        }
-    }
-    catch (err) {
-       const errorMsg =err.message;
+  } catch (err) {
+    const errorMsg = err.message;
     setMessage({ status: true, msg: errorMsg });
     removeMsg(setMessage);
   }
 }
+
 export const getUsersCount = async (setUsersCount) => {
-    try {
-        var result = await axios.get(url + `/users/count`,{withCredentials:true});
-        setUsersCount(result.data)
-    }
-    catch (err) {
-        setUsersCount(0)
-    }
-}
-export async function logout(){
-    removeAccessToken();
-    try{
-        await axios.post(url +"/logout",{withCredentials:true});
-     }
-    catch(err){}
-    window.location="/login"
+  try {
+    var result = await axios.get('/users/count');
+    setUsersCount(result.data);
+  } catch (err) {
+    setUsersCount(0);
+  }
+};
+
+export async function logout() {
+  removeAccessToken();
+  removeRole();
+  window.location = '/login';
 }

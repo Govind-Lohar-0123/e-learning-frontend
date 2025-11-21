@@ -5,15 +5,41 @@ import { useNavigate } from 'react-router';
 
 export default function AddCourse() {
   const navigate = useNavigate();
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+
   const [course, setCourse] = useState({
-    image_url: 'ProgLang/java.png',
-    topics: [],
+    topics: ['1', '2'],
+    name: 'govif',
+    duration: 1,
+    description: 'fdfffd',
+    link: 'www.google.com',
   });
+
   const [topic, setTopic] = useState('');
   function addCourseHandle(e) {
     e.preventDefault();
-    addCourse(testCourse, navigate);
+    const formData = new FormData();
+
+    formData.append('name', course.name);
+    formData.append('description', course.description);
+    formData.append('duration', Number(course.duration));
+    formData.append('link', course.link);
+    course.topics.forEach((topic) => {
+      formData.append('topics[]', topic);
+    });
+    if (file) formData.append('thumbnailImage', file);
+
+    addCourse(formData, navigate);
   }
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    if (selectedFile) {
+      setPreview(URL.createObjectURL(selectedFile));
+    }
+  };
 
   function addTopicHandle(e) {
     if (topic) {
@@ -32,7 +58,7 @@ export default function AddCourse() {
         <form>
           <div className="card shadow" style={{ width: '100%' }}>
             <img
-              src={`${process.env.PUBLIC_URL}/img/${course.image_url}`}
+              src={preview}
               className="course-img mx-auto"
               style={{ objectFit: 'contain' }}
               alt="course"
@@ -41,17 +67,15 @@ export default function AddCourse() {
               <div className="form-group">
                 <label for="courseName">Image URL</label>
                 <input
-                  type="text"
-                  disabled
+                  type="file"
+                  accept="image/*"
                   className="form-control"
-                  value={course?.image_url}
                   id="courseName"
-                  aria-describedby="emailHelp"
-                  placeholder="Name"
+                  onChange={handleFileChange}
                 />
               </div>
               <div className="form-group">
-                <label for="courseName">Name</label>
+                <label for="courseName">Course Name</label>
                 <input
                   type="text"
                   onChange={(e) =>
@@ -60,8 +84,7 @@ export default function AddCourse() {
                   className="form-control"
                   value={course?.name}
                   id="courseName"
-                  aria-describedby="emailHelp"
-                  placeholder="Name"
+                  placeholder="Add Course Name"
                 />
               </div>
               <div className="form-group mt-3">
@@ -74,7 +97,7 @@ export default function AddCourse() {
                   className="form-control"
                   value={course?.description}
                   id="courseDuration"
-                  placeholder="Duration"
+                  placeholder="Add Description"
                 />
               </div>
               <div className="form-group mt-3">
@@ -87,7 +110,7 @@ export default function AddCourse() {
                   className="form-control"
                   value={course?.duration}
                   id="courseDuration"
-                  placeholder="Duration"
+                  placeholder="Add Duration"
                 />
               </div>
               <div className="form-group mt-3">
@@ -100,7 +123,7 @@ export default function AddCourse() {
                   className="form-control"
                   value={course?.link}
                   id="courseDuration"
-                  placeholder="Duration"
+                  placeholder="Add Documentation Link"
                 />
               </div>
               <div className="form-group mt-3">
@@ -111,7 +134,7 @@ export default function AddCourse() {
                   defaultValue={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   id="courseDuration"
-                  placeholder="Duration"
+                  placeholder="Add Topics"
                 />
                 <button
                   type="button"
@@ -126,29 +149,32 @@ export default function AddCourse() {
                   <h3 className="text-center bg-danger w-100 m-auto text-white p-3 rounded">
                     Topic Which You Will Learn In {course?.name} Course
                   </h3>
+
                   <div className="w-75 border m-auto my-5">
-                    <table className="text-center table table-hover ">
-                      <thead>
-                        <tr>
-                          <th scope="col">S.No</th>
-                          <th scope="col">Topic Name</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {course?.topics?.map((topic, idx) => {
-                          return (
+                    {course?.topics?.length > 0 ? (
+                      <table className="text-center table table-hover ">
+                        <thead>
+                          <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Topic Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {course.topics.map((topic, idx) => (
                             <tr key={idx}>
                               <th scope="row">{idx + 1}</th>
                               <td>{topic}</td>
                             </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <p className="text-center">No topics available</p>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>{' '}
+            </div>
           </div>
         </form>
         <button
@@ -157,7 +183,6 @@ export default function AddCourse() {
           style={{ border: 'none' }}
           className="px-4 py-2 my-2 bg-primary mx-auto w-100 text-white text-center "
         >
-          {' '}
           ADD
         </button>
       </div>

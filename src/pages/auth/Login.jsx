@@ -77,7 +77,7 @@ export default function Login() {
           </div>
 
           <a href="/register" className="text-primary">
-            Register
+            Register .
           </a>
           <button
             type="button"

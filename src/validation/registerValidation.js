@@ -37,7 +37,7 @@ export default async function registerValidation(user, setMessage) {
 
     }
     else if (user.conf_password != user.password) {
-        setMessage({ status: true, msg: "Password MissMatch... " });
+        setMessage({ status: true, msg: "Password MisMatch... " });
     }
     else return true;
     removeMsg(setMessage);

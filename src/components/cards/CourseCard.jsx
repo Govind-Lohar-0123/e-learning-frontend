@@ -3,11 +3,10 @@ import { addToMyCourse } from '../../redux/actions/myCourseAction';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 export default function CourseCard({ course, isAdd }) {
-  const userData = useSelector((state) => state.userData);
   const [message, setMessage] = useState({ status: false, message: '' });
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   function handleAddToMyCourse() {
-    addToMyCourse(course.id, userData.id, setMessage);
+    addToMyCourse(course.id, setMessage);
     navigate(0);
   }
 
@@ -33,7 +32,7 @@ export default function CourseCard({ course, isAdd }) {
       </div>
       <ul className="list-group list-group-flush text-center align-items-center">
         <li className="list-group-item w-100">
-          <NavLink to={course.link} target="_self" className="text-deco-none">
+          <NavLink to={course.link} target="_blank" className="text-deco-none">
             <button
               type="button"
               style={{ width: '100%' }}

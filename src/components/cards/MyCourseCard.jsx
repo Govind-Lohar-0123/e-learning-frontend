@@ -25,6 +25,7 @@ export default function MyCourseCard({ course }) {
           <NavLink to={course.link} className="text-deco-none">
             <button
               type="button"
+              target="_blank"
               style={{ width: '100%' }}
               className="btn btn-danger  d-block text-bold"
             >

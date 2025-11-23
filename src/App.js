@@ -22,7 +22,7 @@ import { getUser } from './redux/actions/userActions';
 import PageNotFound from './pages/notfound/NotFound';
 import AddCourse from './pages/admin/Courses/AddCourse';
 import { STORAGE_KEYS } from './const';
-
+import ProtectedRoute from './utils/ProtectedRoute';
 function App() {
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,9 +43,10 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: isLoggedIn ? <Layout /> : <Navigate to="/login" />,
+      element: <ProtectedRoute> <Layout /> </ProtectedRoute>,
       children: [
-        { index: true, element: <Home /> },
+        { index: true, element: <Home />  
+        },
         { path: 'courses', element: <AllCourses /> },
         { path: 'courses/:course_id', element: <CourseDetail /> },
       ],
@@ -57,7 +58,7 @@ function App() {
     },
     {
       path: '/profile',
-      element: isLoggedIn ? <MyProfileLayout /> : <Navigate to="/login" />,
+      element: <ProtectedRoute> <MyProfileLayout />  </ProtectedRoute>,
       children: [
         { index: true, element: <Profile /> },
         { path: 'mycourses', element: <MyCourses /> },
@@ -66,11 +67,10 @@ function App() {
     {
       path: '/admin',
       element:
-        isLoggedIn && userRole === 'Admin' ? (
+       <ProtectedRoute>
           <AdminLayout />
-        ) : (
-          <Navigate to="/login" />
-        ),
+       </ProtectedRoute>,
+      
       children: [
         { index: true, element: <AdminDashBoard /> },
         { path: 'courses', element: <Courses /> },
@@ -83,7 +83,7 @@ function App() {
       element: <PageNotFound />,
     },
   ]);
-
+ 
   return <RouterProvider router={router} />;
 }
 

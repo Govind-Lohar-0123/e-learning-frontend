@@ -8,16 +8,16 @@ export const addCourse = async (course, navigate) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    navigate('/admin/courses');
+    window.location.href='/admin/courses';
   } catch (err) {
      throw new Error("Add new course failed...")
   }
 };
 
-export const deleteCourse = async (courseId, navigate) => {
+export const deleteCourse = async (courseId) => {
   try {
     await axios.delete(`/courses/${courseId}`);
-   
+      window.location.reload();
   } catch (err) {
     throw new Error("Delete course failed...")
   }
@@ -26,20 +26,22 @@ export const deleteCourse = async (courseId, navigate) => {
 export const editCourse = async (courseId, course, navigate) => {
   try {
     await axios.put(`/courses/${courseId}`, course);
-    navigate('/admin/courses');
+     window.location.href="/admin/courses"
+    
   } catch (err) {
      throw new Error("Edit course failed...")
   }
 };
 
 export const getAllCourses = async (search, setAllCourses) => {
+
    const params = {
     search:search || undefined,
     
   };
   try {
     const result = await axios.get(`/courses`,{params});
-    console.log(result)
+   
     setAllCourses({ status: true, courses: result.data });
   } catch (err) {
     setAllCourses({ status: false, courses: [] });
@@ -64,6 +66,8 @@ export const getCoursesByLimit = async (limit, search, setCourses) => {
     const result = await axios.get(`/courses/limit`, {
       params,
     });
+
+    
 
     setCourses({ status: true, courses: result.data });
   } catch (err) {

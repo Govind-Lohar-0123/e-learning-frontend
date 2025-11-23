@@ -7,7 +7,7 @@ export default function MyCoursesCourses() {
   const userData = useSelector((state) => state.userData);
   const [myCourses, setMyCourses] = useState({ status: false, myCourses: [] });
   useEffect(() => {
-    getMyAllCourses(search, userData.id, setMyCourses);
+    getMyAllCourses(search, setMyCourses);
   }, [search, userData]);
 
   return (

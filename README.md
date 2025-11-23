@@ -1,4 +1,3 @@
-
  ## E-Learning Frontend
 
 This is the frontend of the E-Learning Management System — a web application built using React.js.

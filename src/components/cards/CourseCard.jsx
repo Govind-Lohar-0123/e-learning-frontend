@@ -33,7 +33,7 @@ export default function CourseCard({ course, isAdd }) {
       </div>
       <ul className="list-group list-group-flush text-center align-items-center">
         <li className="list-group-item w-100">
-          <NavLink to={course.link} className="text-deco-none">
+          <NavLink to={course.link} target="_self" className="text-deco-none">
             <button
               type="button"
               style={{ width: '100%' }}

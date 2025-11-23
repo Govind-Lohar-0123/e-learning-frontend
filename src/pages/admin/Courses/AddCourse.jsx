@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { addCourse } from '../../../redux/actions/courseAction';
 import { useNavigate } from 'react-router';
 import validateCourse from '../../../validation/courseValidation.js';
-import { removeMsg } from '../../../assets/data.js';
+import { removeMsg } from '../../../utils/common.js';
 export default function AddCourse() {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
@@ -113,9 +113,12 @@ export default function AddCourse() {
                 />
               </div>
               <div className="form-group mt-3">
-                <label for="courseDuration">Duration</label>
+                <label for="courseDuration">Duration in hour</label>
                 <input
                   type="number"
+                  onKeyDown={(e) => {
+                    if (e.key === '.') e.preventDefault();
+                  }}
                   onChange={(e) =>
                     setCourse({ ...course, duration: e.target.value })
                   }

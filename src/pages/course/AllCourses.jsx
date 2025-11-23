@@ -27,7 +27,7 @@ export default function AllCourses() {
             <Background img={'bg2'} />
           </div>
           <div>
-            <div className="m-2 my-4 mb-5 w-25 m-auto">
+            <div className="m-2 my-4 mb-5  m-auto" id="search">
               <input
                 className="form-control me-2"
                 onChange={(e) => setSearch(e.target.value)}

@@ -24,9 +24,9 @@ export default function Courses() {
     <div className="p-5">
       {courses?.status && myCourses?.status ? (
         <div>
-          <div className="m-2 my-4 mb-5 w-25 m-auto">
+          <div className="m-2 my-4 mb-5 m-auto " id="search">
             <input
-              className="form-control me-2"
+              className="form-control me-2 "
               defaultValue={search}
               onChange={(e) => setSearch(e.target.value)}
               type="search"

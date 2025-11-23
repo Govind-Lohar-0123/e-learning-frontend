@@ -24,8 +24,8 @@ export default function Navbar() {
           <h1 className="text-white text-bold">iSchool</h1>
           <span className="text-white text-bold">Learn and Implements</span>
         </div>
-        <div className="d-flex align-items-center  ">
-          <div className="">
+        <div className="d-flex align-items-center  flex-wrap ">
+          <div className="mx-auto">
             <nav>
               <ul className="nav">
                 <li className="nav-item">
@@ -51,10 +51,10 @@ export default function Navbar() {
             </nav>
           </div>
           <div className="">
-            <ul className="nav">
+            <ul className="nav ">
               {!isLoggedIn ? (
                 <>
-                  <li className="nav-item login ">
+                  <li className="nav-item login mx-auto">
                     <NavLink
                       to="/login"
                       className="nav-link active "

@@ -1,5 +1,5 @@
 import axios from '../../api/apiClient';
-import { removeMsg } from '../../assets/data';
+import { removeMsg } from '../../utils/common';
 
 export const addToMyCourse = async (courseId, userId, setMessage) => {
   try {
@@ -9,12 +9,14 @@ export const addToMyCourse = async (courseId, userId, setMessage) => {
   } catch (err) {}
 };
 
-export const getMyAllCourses = async (search, userId, setMyCourses) => {
-  const params = { search: search || undefined };
+export const getMyAllCourses = async (search,userId, setMyCourses) => {
+   const params = {
+    search:search || undefined,
+   
+  };
+  
   try {
-    const result = await axios.get(`/mycourses/${userId}`, {
-      params,
-    });
+    const result = await axios.get(`/courses`,{params});
 
     setMyCourses({ status: true, myCourses: result.data });
   } catch (err) {
@@ -22,9 +24,9 @@ export const getMyAllCourses = async (search, userId, setMyCourses) => {
   }
 };
 
-export const removeMyCourse = async (courseId, userId, navigate) => {
+export const removeMyCourse = async (courseId, userId) => {
   try {
-    await axios.delete(`/mycourses/${courseId}/${userId}`);
+    await axios.delete(`/courses/${courseId}`);
     window.location.reload();
   } catch (err) {
     

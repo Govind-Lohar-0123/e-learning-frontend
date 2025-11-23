@@ -13,20 +13,17 @@ export default function MyCoursesCourses() {
   return (
     <div className="w-100 ">
       <div style={{ height: '85vh', overflow: 'auto' }}>
-        {myCourses?.status && myCourses?.myCourses?.length > 0 ? (
-          <div className="m-2 my-4 mb-5 w-50 m-auto p-2 shadow ">
-            <input
-              className="form-control m-2 p-2"
-              defaultValue={search}
-              onChange={(e) => setSearch(e.target.value)}
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
-        ) : (
-          ''
-        )}
+        <div className="m-2 my-4 mb-5  m-auto p-2 shadow " id="search">
+          <input
+            className="form-control m-2 p-2"
+            defaultValue={search}
+            onChange={(e) => setSearch(e.target.value)}
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </div>
+
         {myCourses?.status && myCourses?.myCourses?.length > 0 ? (
           <div className="d-flex align-items-center justify-content-center flex-wrap mt-2 gap-4">
             {myCourses?.myCourses.map((course, idx) => {

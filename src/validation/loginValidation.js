@@ -1,5 +1,5 @@
 import { isValidEmail, isValidPassword } from '../validation/regularEx';
-import { removeMsg } from '../assets/data';
+import { removeMsg } from '../utils/common';
 
 export default async function loginValidation(user, setMessage) {
   for (let key in user) {

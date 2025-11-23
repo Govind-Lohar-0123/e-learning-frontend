@@ -13,7 +13,7 @@ export default function AdminDashBoard() {
   return (
     <div className="w-100 ">
       <div className="d-flex align-item-center w-100 h-100">
-        <div className="d-flex align-item-center text-center w-75 m-auto gap-3 justify-content-space-between">
+        <div className="d-flex align-item-center flex-wrap text-center w-75 m-auto gap-3 justify-content-space-between ">
           <div
             className="card text-white bg-danger mb-3"
             style={{ width: '30rem', height: '300px' }}

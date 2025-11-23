@@ -1,6 +1,6 @@
 
 import { isValidEmail, isValidPassword, isValidText } from "./regularEx";
-import { removeMsg } from "../assets/data";
+import { removeMsg } from "../utils/common";
 
 
 var passMsg = <>

@@ -33,9 +33,13 @@ export const editCourse = async (courseId, course, navigate) => {
 };
 
 export const getAllCourses = async (search, setAllCourses) => {
+   const params = {
+    search:search || undefined,
+    
+  };
   try {
-    const result = await axios.get(`/courses?search=${search}`);
-
+    const result = await axios.get(`/courses`,{params});
+    console.log(result)
     setAllCourses({ status: true, courses: result.data });
   } catch (err) {
     setAllCourses({ status: false, courses: [] });
@@ -53,10 +57,11 @@ export const getCourseDetailsById = async (courseId, setCourse) => {
 
 export const getCoursesByLimit = async (limit, search, setCourses) => {
   const params = {
-    search:search || undefined
+    search:search || undefined,
+    limit:limit ||0
   };
   try {
-    const result = await axios.get(`/courses/limit/${limit}`, {
+    const result = await axios.get(`/courses/limit`, {
       params,
     });
 

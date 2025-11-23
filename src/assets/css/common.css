@@ -1,87 +1,111 @@
-*{
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
 }
-
 
 /* ===================COMMOM PROPETY LIKE BOOTSTRAP=============== */
 
-.text-bold{
-
-    font-weight: bold!important;
+.text-bold {
+  font-weight: bold !important;
 }
-a{
-    text-decoration: none;
-    color: white!important;
-
+a {
+  text-decoration: none;
+  color: white !important;
 }
-.align-items-center{
-    align-items: center;
+.align-items-center {
+  align-items: center;
 }
 
-.justify-content-center{
-    justify-content: center;
+.justify-content-center {
+  justify-content: center;
 }
-.align-items-space-between{
-    align-items: space-between;
+.align-items-space-between {
+  align-items: space-between;
 }
-.flex-dir-col{
-    flex-direction: column;
+.flex-dir-col {
+  flex-direction: column;
 }
-.justify-content-space-between{
-    justify-content: space-between;
+.justify-content-space-between {
+  justify-content: space-between;
 }
-.text-deco-none{
-    text-decoration: none;
+.text-deco-none {
+  text-decoration: none;
 }
 
 /* ================================================================= */
 
+header {
+  min-height: 80px;
+  width: 100%;
+  padding: 20px;
 
-header{
-    min-height:80px;
-    width:100%;
-    padding:20px;
-    
-    background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-header > div{
-    align-items: center;
+header > div {
+  align-items: center;
 }
 
 .course-card {
-  height: 100%;            
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .course-img {
   width: 100%;
-  height: 180px;            
+  height: 180px;
   object-fit: cover;
   border-radius: 6px 6px 0 0;
 }
 
 .card-body {
-  flex: 1;                  
+  flex: 1;
 }
 
 .card-description {
-  min-height: 80px;         
+  min-height: 80px;
 }
 .card-img {
   width: 100%;
-  height: 180px; 
-  object-fit:contain!important; 
+  height: 180px;
+  object-fit: contain !important;
   padding: 10px;
 }
 
-
-
-
-
+#search {
+  width: 40%;
+}
+#profile {
+  width: 60%;
+}
+#myprofilelayout {
+  flex-wrap: nowrap;
+}
+#dashboard {
+  flex-wrap: nowrap;
+  width: 85vw;
+}
+#layout {
+  flex-wrap: nowrap;
+}
+#left-side {
+  width: 100vw;
+}
+@media screen and (max-width: 600px) {
+  #search {
+    width: 80%;
+  }
+  #myprofilelayout {
+    flex-wrap: wrap;
+  }
+  #profile {
+    width: 100%;
+  }
+  #layout {
+    flex-wrap: wrap;
+  }
+}

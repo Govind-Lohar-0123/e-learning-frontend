@@ -14,7 +14,7 @@ export default function Courses() {
       <div style={{ height: '85vh', overflow: 'auto' }}>
         <div className="d-flex align-items-center flex-wrap">
           {courses?.status ? (
-            <div className="m-2 my-4 mb-5 w-50 m-auto p-2 shadow ">
+            <div className="m-2 my-4 mb-5  m-auto p-2 shadow " id="search">
               <input
                 onChange={(e) => setSearch(e.target.value)}
                 className="form-control m-2 p-2"

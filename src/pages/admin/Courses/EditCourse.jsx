@@ -70,11 +70,14 @@ export default function EditCourse() {
                       placeholder="Name"
                     />
                   </div>
-                  <div className="form-group mt-3">
-                    <label for="courseDuration">Duration</label>
+                  <div className="form-group mt-3 mt-2">
+                    <label for="courseDuration">Duration in Hour</label>
                     <input
                       type="number"
                       className="form-control"
+                      onKeyDown={(e) => {
+                        if (e.key === '.') e.preventDefault();
+                      }}
                       value={Number(course.course.duration)}
                       onChange={(e) =>
                         setCourse({

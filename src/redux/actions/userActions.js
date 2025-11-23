@@ -1,4 +1,4 @@
-import { removeMsg } from '../../assets/data';
+import { removeMsg } from '../../utils/common';
 import axios from '../../api/apiClient';
 import { removeAccessToken, removeRole, setAccessToken, setRole } from '../../utils/localStorage';
 

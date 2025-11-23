@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 
 export default function AdminLeftSide() {
   return (
-    <div className="bg-secondary p-3 left-side mb-3 h-100 ">
+    <div className="bg-secondary p-3 mb-3 h-100 " id="left-side">
       <div className="m-2 ">
         <div className="w-100  m-auto " style={{ height: '250px' }}>
           <img

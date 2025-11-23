@@ -46,7 +46,7 @@ export default function Courses() {
             <NavLink to="/courses" style={{ textDecoration: 'none' }}>
               <button
                 type="button"
-                className="btn btn-primary text-bold mx-auto d-block w-50 my-5"
+                className="btn btn-primary text-bold view-all-courses mx-auto d-block w-50 my-5"
               >
                 View All Courses
               </button>

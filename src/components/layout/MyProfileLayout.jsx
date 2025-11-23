@@ -7,7 +7,7 @@ export default function MyProfileLayout() {
     <>
       <Header />
       <div>
-        <div className="d-flex w-100 " style={{ height: '85vh' }}>
+        <div className="d-flex w-100 " id="layout" style={{ height: '85vh' }}>
           <MyProfileLeftSide />
           <Outlet />
         </div>

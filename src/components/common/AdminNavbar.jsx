@@ -9,48 +9,46 @@ export default function AdminNavbar() {
         <span className="text-white text-bold">Learn and Implements</span>
       </div>
       <div className="d-flex align-items-center  ">
-        <nav>
-          <ul className="nav align-items-center">
-            <li className="nav-item">
-              <NavLink
-                to="/"
-                className="nav-link active text-bold"
-                aria-current="page"
-                href="#"
+        <ul className="nav align-items-center ">
+          <li className="nav-item">
+            <NavLink
+              to="/"
+              className="nav-link active text-bold"
+              aria-current="page"
+              href="#"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className="nav-item login ">
+            <NavLink
+              to="/profile"
+              className="nav-link active "
+              aria-current="page"
+              href="#"
+            >
+              <button
+                type="button"
+                className="btn  bg-primary text-white text-bold px-5"
               >
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item login ">
-              <NavLink
-                to="/profile"
-                className="nav-link active "
-                aria-current="page"
-                href="#"
-              >
-                <button
-                  type="button"
-                  className="btn  bg-primary text-white text-bold px-5"
-                >
-                  MY PROFILE{' '}
-                </button>
-              </NavLink>
-            </li>
+                MY PROFILE{' '}
+              </button>
+            </NavLink>
+          </li>
 
-            <li className="nav-item login ">
-              <NavLink
-                className="nav-link active"
-                onClick={logout}
-                aria-current="page"
-                href="#"
-              >
-                <button type="button" className="btn btn-light text-bold px-5">
-                  LOGOUT
-                </button>
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+          <li className="nav-item login ">
+            <NavLink
+              className="nav-link active"
+              onClick={logout}
+              aria-current="page"
+              href="#"
+            >
+              <button type="button" className="btn btn-light text-bold px-5">
+                LOGOUT
+              </button>
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </header>
   );

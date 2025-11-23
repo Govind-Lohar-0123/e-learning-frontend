@@ -93,7 +93,7 @@ header > div {
   flex-wrap: nowrap;
 }
 #left-side {
-  width: 100vw;
+  width: 300px;
 }
 @media screen and (max-width: 600px) {
   #search {
@@ -107,5 +107,19 @@ header > div {
   }
   #layout {
     flex-wrap: wrap;
+  }
+  .nav li {
+    margin: auto;
+  }
+  .view-all-courses {
+    width: 80% !important;
+  }
+  #layout {
+    flex-wrap: wrap;
+  }
+  #left-side {
+    width: 100%;
+
+    margin: auto;
   }
 }

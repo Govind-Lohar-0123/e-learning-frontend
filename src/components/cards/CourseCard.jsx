@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from 'react-router';
 import { addToMyCourse } from '../../redux/actions/myCourseAction';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
 export default function CourseCard({ course, isAdd }) {
   const [message, setMessage] = useState({ status: false, message: '' });

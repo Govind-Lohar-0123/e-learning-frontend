@@ -7,7 +7,7 @@ export default function AdminLayout() {
     <>
       <AdminHeader />
       <div>
-        <div className="d-flex w-100 " style={{ height: '85vh' }}>
+        <div className="d-flex w-100 " id="layout" style={{ height: '85vh' }}>
           <AdminLeftSide />
           <Outlet />
         </div>
